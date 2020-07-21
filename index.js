@@ -5,7 +5,8 @@ const app = express();
 
 // Settings
 app.set('port', process.env.PORT || 3000);
-const requestMiddlewares = async (req, res, next) => {
+const requestMiddlewares = (req, res, next) => {
+    console.log("CUERPASO", req);
     if (!req.body.rut || !req.body.celular || !req.body.correo || !req.body.renta) {
         respuesta = {
             error: true,
@@ -18,9 +19,9 @@ const requestMiddlewares = async (req, res, next) => {
 
 // Middlewares
 app.use(cors({ origin: 'http://localhost:4200' }));
-app.use(requestMiddlewares);
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(requestMiddlewares);
 
 // Routes
 app.use('/api', require('./routes/user.routes'));
