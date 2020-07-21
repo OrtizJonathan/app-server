@@ -6,13 +6,21 @@ const app = express();
 // Settings
 app.set('port', process.env.PORT || 3000);
 const requestMiddlewares = (req, res, next) => {
-    console.log("CUERPASO", req);
-    if (!req.body.rut || !req.body.celular || !req.body.correo || !req.body.renta) {
+    if (
+        req.body.rut ==="" || 
+        req.body.celular==="" || 
+        req.body.correo==="" || 
+        req.body.renta==="" ||
+        typeof req.body.rut ==="undefined" || 
+        typeof req.body.celular==="undefined" || 
+        typeof req.body.correo==="undefined" || 
+        typeof req.body.renta==="undefined"
+    ) {
         respuesta = {
             error: true,
-            codigo: 502,
             mensaje: 'Campos insuficientes para realizar consulta'
         };
+        res.status(400).send(respuesta);
     }
     next();
 }

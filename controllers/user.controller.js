@@ -1,11 +1,6 @@
 const fs = require('fs');
 const userCtrl = {};
 
-let respuesta = {
-    error: false,
-    codigo: 200,
-    mensaje: ''
-};
 
 userCtrl.createConsult = async (req, res) => {
     fs.appendFile(Date.now().toString() + '.txt', 'rut:' + req.body.rut + ' celular:' + req.body.celular +
